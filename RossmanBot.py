@@ -51,7 +51,7 @@ def load_dataset(store_id):
 
 def predict(data):
     # API call
-    url = 'https://rossman-sales-forecasts.herokuapp.com/rossman/predict'
+    url = 'https://rossman-joaomj.herokuapp.com/rossman/predict'
     header = {'Content-type':'application/json'}
     data = data
 
@@ -65,8 +65,8 @@ def predict(data):
 
 
 def parse_message(message):
-    chat_id = message['message']['chat']['id']
-    store_id = message['message']['text']
+    chat_id = message['message']['chat']['id'] # Telegram user ID
+    store_id = message['message']['text'] # text sent by the user to the bot
     
     store_id = store_id.replace('/', '') # substitui '/' por vazio na mensagem digitada pelo usuário.
 
@@ -76,7 +76,7 @@ def parse_message(message):
     except ValueError:    
 
         if store_id == 'start':       
-            msg = 'Olá! informe o número da loja que você deseja ver a previsão de faturamento.'
+            msg = 'Olá! Informe o número da loja que você deseja ver a previsão de faturamento.'
             send_message(chat_id, msg)
         
         else:
@@ -128,4 +128,4 @@ def index():
 
 if __name__=='__main__':
     port = os.environ.get('PORT',5000)
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
