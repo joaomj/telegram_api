@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 # constants
 load_dotenv()
-TOKEN = os.getenv('TOKEN_BOT') # telegram bot token
+TOKEN = os.environ('TOKEN_BOT') # telegram bot token
 
 
 
