@@ -5,7 +5,7 @@ import os
 from flask import Flask, request, Response
 
 # telegram bot token
-TOKEN = os.environ.get('TOKEN_BOT') # return token value
+TOKEN = os.environ('TOKEN_BOT') # return token value
 
 
 def send_message(chat_id, text):
