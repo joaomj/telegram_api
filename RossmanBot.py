@@ -3,14 +3,6 @@ import requests
 import json
 import os
 from flask import Flask, request, Response
-from dotenv import load_dotenv
-
-
-# constants
-load_dotenv()
-TOKEN = os.environ('TOKEN_BOT') # telegram bot token
-
-
 
 def send_message(chat_id, text):
     url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
@@ -94,6 +86,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    # telegram bot token
+    TOKEN = os.environ.get('TOKEN_BOT')
+    
     if request.method == 'POST':
         message = request.get_json()
 
