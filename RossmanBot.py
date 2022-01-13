@@ -9,7 +9,7 @@ TOKEN = os.environ['TOKEN_BOT'] # return token value
 
 
 def send_message(chat_id, text):
-    print('TOKEN is: ', TOKEN)
+    #print('TOKEN is: ', TOKEN)
     url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
 
@@ -94,6 +94,7 @@ def index():
   
     if request.method == 'POST':
         message = request.get_json()
+        print(message)
 
         chat_id, store_id = parse_message(message)
 
