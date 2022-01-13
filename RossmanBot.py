@@ -9,6 +9,7 @@ TOKEN = os.environ['TOKEN_BOT'] # return token value
 
 
 def send_message(chat_id, text):
+    print('TOKEN is: ', TOKEN)
     url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
 
