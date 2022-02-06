@@ -80,7 +80,7 @@ def parse_message(message):
             send_message(chat_id, msg)
         
         else:
-            send_message(chat_id, 'Wrong Store ID')
+            send_message(chat_id, 'ID inválido!')
         
         store_id = 'error'
 
@@ -118,7 +118,7 @@ def index():
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
             else:
-                send_message(chat_id, 'Store not Available')
+                send_message(chat_id, 'Loja Indisponível.')
                 return Response('Ok', status=200)
         else:
             return Response('Ok', status=200)
