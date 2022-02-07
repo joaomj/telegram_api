@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import json
 import os
+import locale
 from flask import Flask, request, Response
 
 # telegram bot token
@@ -111,9 +112,18 @@ def index():
                 d2 = d1[['store', 'prediction']].groupby('store').sum().reset_index()
 
                 # send message
-                msg = 'Loja n. {} vai vender R${:.,2f} nas próximas 06 semanas'.format(
+                
+                # formatting currency
+                locale.setlocale(locale.LC_MONETARY, 'pt_BR.utf8')
+                sales_value = locale.currency(d2['prediction'].values[0], grouping=True)
+
+                msg = 'Loja n. {} vai vender {} nas próximas 06 semanas'.format(
                         d2['store'].values[0],
-                        d2['prediction'].values[0])
+                        sales_value)
+
+                # msg = 'Loja n. {} vai vender R${:,.2f} nas próximas 06 semanas'.format(
+                #         d2['store'].values[0],
+                #         d2['prediction'].values[0])
                 
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
