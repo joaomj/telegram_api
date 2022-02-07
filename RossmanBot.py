@@ -114,7 +114,7 @@ def index():
                 # send message
                 
                 # formatting currency
-                locale.setlocale(locale.LC_MONETARY, 'pt_BR.utf8')
+                locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
                 sales_value = locale.currency(d2['prediction'].values[0], grouping=True)
 
                 msg = 'Loja n. {} vai vender {} nas próximas 06 semanas'.format(
