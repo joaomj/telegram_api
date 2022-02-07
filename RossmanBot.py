@@ -80,7 +80,7 @@ def parse_message(message):
             send_message(chat_id, msg)
         
         else:
-            send_message(chat_id, 'Wrong Store ID')
+            send_message(chat_id, 'ID inválido!')
         
         store_id = 'error'
 
@@ -111,14 +111,23 @@ def index():
                 d2 = d1[['store', 'prediction']].groupby('store').sum().reset_index()
 
                 # send message
-                msg = 'Loja n. {} vai vender R${:.,2f} nas próximas 06 semanas'.format(
+                
+                # formatting currency
+                sales_value = 'R${:,.2f}'.format(d2['prediction'].values[0]).replace(',', 'X').replace('.', ',').replace('X', '.')
+
+                msg = 'Loja n. {} vai vender {} nas próximas 06 semanas'.format(
                         d2['store'].values[0],
-                        d2['prediction'].values[0])
+                        sales_value)
+
+                # msg = 'Loja n. {} vai vender R${:,.2f} nas próximas 06 semanas'.format(
+                #         d2['store'].values[0],
+                #         d2['prediction'].values[0])
                 
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
             else:
                 send_message(chat_id, 'Loja indisponível.')
+
                 return Response('Ok', status=200)
         else:
             return Response('Ok', status=200)
