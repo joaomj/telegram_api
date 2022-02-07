@@ -2,7 +2,6 @@ import pandas as pd
 import requests
 import json
 import os
-import locale
 from flask import Flask, request, Response
 
 # telegram bot token
@@ -114,8 +113,7 @@ def index():
                 # send message
                 
                 # formatting currency
-                locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
-                sales_value = locale.currency(d2['prediction'].values[0], grouping=True)
+                sales_value = 'R${:,.2f}'.format(d2['prediction'].values[0]).replace(',', 'X').replace('.', ',').replace('X', '.')
 
                 msg = 'Loja n. {} vai vender {} nas próximas 06 semanas'.format(
                         d2['store'].values[0],
