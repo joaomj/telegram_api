@@ -111,7 +111,7 @@ def index():
                 d2 = d1[['store', 'prediction']].groupby('store').sum().reset_index()
 
                 # send message
-                msg = 'Loja n. {} vai vender R${:,.2f} nas próximas 06 semanas'.format(
+                msg = 'Loja n. {} vai vender R${:.,2f} nas próximas 06 semanas'.format(
                         d2['store'].values[0],
                         d2['prediction'].values[0])
                 
